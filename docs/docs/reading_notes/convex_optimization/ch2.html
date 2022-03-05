@@ -1,0 +1,103 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>2. Convext Set</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div>
+        <h2>2.5 Separating and supporting hyperplanes</h2>
+        <h3>2.5.1 Separating hyperplane theorem</h3>
+        <p>
+            suppose C and D is non-empty and disjoint convex set, then there mus
+            exists \( a \ne 0 \) and \( b \) such that \( a^T x + b \le 0 \) for
+            all \( x \in C \)
+        </p>
+        <p>
+            assume the distance between C and D is defined as
+            \[
+                \operatorname{dist}(C, D) = \operatorname{inf}\{ ||u-v||_2 \ \big| u \in C, \ v \in D \}
+            \]
+            is positive. (inf means Infimum).
+            
+            and there exists points \( c \in C \) and \( d \in D \) achieve the minimum distance, e.g.
+            \( ||c-d||_2 = \operatorname{dist}(C, D) \).
+            it is satisfied if C and D is closed and one set is bounded.
+        </p>
+        <p>
+            define
+            \[
+                a = d-c, \ b = { ||d||_2^2 - ||c||^2_2 \over 2}
+            \]
+            we will find that affine function
+            \[
+                \begin{aligned}
+                    f(x) & = a^Tx -b \\
+                    & = (d-c)^T x - { ||d||_2^2 - ||c||^2_2 \over 2} \\
+                    & = (d-c)^T x - { (d-c)^T(d+c) \over 2} \\
+                    & = (d-c)^T( x - {(d+c) \over 2} )
+                \end{aligned}
+            \]
+            separate \( C \) and \( D \).
+        </p>
+        <p>
+            to prove \( f \) is nonnegative on \( D \).
+
+            suppose there is a point \( u \) in \( D \) such that
+            \[
+                f(u) = (d-c)^T( u - {(d+c) \over 2} ) \lt 0
+            \]
+
+            rewrite \( f(u) \) as
+            \[
+                \begin{aligned}
+                f(u) & = (d-c)^T( u - d + (d-c)/2) \\
+                    & = (d-c)^T(u-d) + ||d-c||^2_2/2 \\
+                \end{aligned}
+            \]
+
+            if \( f(u) \lt 0 \) holds, then we will have \( (d-c)^T(u-d) \lt 0 \),
+
+            now observe that
+            \[
+                \begin{aligned}
+                    & \frac{d}{dt} || d + t(u-d) - c||^2_2 \\
+
+                    = & \frac{d}{dt} \ \sum_{i=1}^{n} \left[ t^2(u_i - d_i)^2 + 2t(u_i-d_i)(d_i-c_i) + (d_i-c_i)^2 \right] \\
+
+                    = & \frac{d}{dt} \left[ t^2 ||u-d||^2_2 + 2t (d-c)^T(u-d) + ||d-c||^2_2 \right] \\
+
+                    = & 2t ||u-d||^2_2 + 2(d-c)^T(u-d) \\
+
+                    & \ \\
+
+                    & \frac{d}{dt} || d + t(u-d) - c||^2_2 \Big|_{t=0} = 2(d-c)^T(u-d) \lt 0
+
+                \end{aligned}
+            \]
+
+            so for small \( t \in (0, 1] \) we will have
+            \[
+                ||d + t(u-d) - c||_2 \lt ||d-c||_2
+            \]
+
+            which means point \( d + t(u-d) \) is closer to c that d is.
+            and since \( D \) is convex and \( d + t(u-d) = (1-t)d + tu \in D \). this
+            leads to conflict since \( d \) is assumed to be the point in \( D \) that
+            is closet to \( c \)
+
+            NOTE: \( t \in (0, 1] \) is just to prove convex combination of \( u \)
+            and \( d \) is in \( D \), actually \( t \) can take a narrow range such
+            as \( (0, \epsilon) \) where \( \epsilon \) is a small value but less than 1
+        </p>
+        <h3>2.5.2 supporting hyperplanes</h3>
+    </div>
+
+</body>
+
+</html>
